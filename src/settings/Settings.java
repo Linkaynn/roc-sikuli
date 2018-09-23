@@ -11,6 +11,7 @@ public class Settings {
 	private static Logger log = LogManager.getLogger(Settings.class);
 
 	public static void initialize() {
+		org.sikuli.basics.Settings.DebugLogs = false;
 		PropertyConfigurator.configure("log4j.properties");
 		Images.init();
 		ImagePath.add("images/");

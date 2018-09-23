@@ -5,6 +5,7 @@ import javafx.scene.control.ButtonType;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
 
@@ -21,7 +22,7 @@ public class ImageManager {
 	/**
 	 * Make a screenshot if the not exist
 	 */
-	public static String getImage(String filename) {
+	public static Pattern getImage(String filename) {
 		String pathname = "images/" + filename + ".png";
 		if (!new File(pathname).exists()) {
 			log.log(Level.INFO, pathname + " not exist.");
@@ -35,7 +36,12 @@ public class ImageManager {
 				try {
 					log.log(Level.INFO, "Getting image");
 
-					Region region = Screen.getPrimaryScreen().selectRegion("Select Area to capture as Image");
+
+					Region region = null;
+					while (region == null) {
+						region = Screen.getPrimaryScreen().selectRegion("Select Area to capture as Image");
+						new Alert(AlertType.WARNING, "Try again when you want").showAndWait();
+					}
 					ImageIO.write(region.getLastScreenImage().getImage(), "PNG", new File(pathname));
 				} catch (IOException e) {
 					log.log(Level.ERROR, "An error happened retrieving the image...");
@@ -45,6 +51,6 @@ public class ImageManager {
 				log.log(Level.WARN, "User do not want to select anything, using " + filename + " will be crush");
 			}
 		}
-		return pathname;
+		return new Pattern(pathname);
 	}
 }

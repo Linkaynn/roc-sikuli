@@ -5,19 +5,24 @@ import controls.exceptions.TextNotFoundException;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
 
 public class Controller {
 	private static Logger log = LogManager.getLogger(Controller.class);
 
-	private Screen screen = Screen.getPrimaryScreen();
+	protected Screen screen = Screen.getPrimaryScreen();
 
-	public boolean click(String image) throws ClickException {
-		return click(image, false);
+	public boolean click(Pattern image) {
+		try {
+			return click(image, false);
+		} catch (ClickException ignored) {} // Never will be pass here
+
+		return false;
 	}
 
-	public boolean click(String image, boolean throwException) throws ClickException {
+	public boolean click(Pattern image, boolean throwException) throws ClickException {
 		try {
 			screen.click(image);
 			log.log(Level.INFO, image + " was clicked.");
@@ -34,8 +39,12 @@ public class Controller {
 		return true;
 	}
 
-	public String read(Region region, String needle, float timeout) throws TextNotFoundException {
-		return read(region, needle, timeout, false);
+	public String read(Region region, String needle, float timeout) {
+		try {
+			return read(region, needle, timeout, false);
+		} catch (TextNotFoundException ignored) {} // Never will be pass here
+
+		return "";
 	}
 
 	public String read(Region region, String needle, float timeout, boolean throwException) throws TextNotFoundException {
@@ -57,4 +66,7 @@ public class Controller {
 		}
 	}
 
+	protected boolean exists(Pattern image) {
+		return screen.exists(image) != null;
+	}
 }
