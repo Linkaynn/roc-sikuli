@@ -16,7 +16,7 @@ import java.util.Optional;
 import static javafx.scene.control.Alert.AlertType;
 
 public class ImageManager {
-	static Logger log = LogManager.getLogger(ImageManager.class);
+	private static Logger log = LogManager.getLogger(ImageManager.class);
 
 	/**
 	 * Make a screenshot if the not exist
