@@ -21,7 +21,7 @@ public class Move {
 
 	public static void down() throws FindFailed {
 		Location middle = calculateMiddle();
-		PRIMARY_SCREEN.dragDrop(middle, new Location(middle.x, middle.y + middle.y / 2));
+		PRIMARY_SCREEN.dragDrop(new Location(middle.x, middle.y + middle.y / 2), middle);
 	}
 
 	public static void left() throws FindFailed {
@@ -31,6 +31,6 @@ public class Move {
 
 	public static void right() throws FindFailed {
 		Location middle = calculateMiddle();
-		PRIMARY_SCREEN.dragDrop(middle, new Location(middle.x +  middle.x / 2, middle.y));
+		PRIMARY_SCREEN.dragDrop(new Location(middle.x +  middle.x / 2, middle.y), middle);
 	}
 }
