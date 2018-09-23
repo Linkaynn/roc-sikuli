@@ -1,4 +1,4 @@
-package movement;
+package controls;
 
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Location;
