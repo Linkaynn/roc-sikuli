@@ -36,11 +36,13 @@ public class ImageManager {
 				try {
 					log.log(Level.INFO, "Getting image");
 
-
 					Region region = null;
 					while (region == null) {
 						region = Screen.getPrimaryScreen().selectRegion("Select Area to capture as Image");
-						new Alert(AlertType.WARNING, "Try again when you want").showAndWait();
+
+						if (region == null) {
+							new Alert(AlertType.WARNING, "Try again when you want").showAndWait();
+						}
 					}
 					ImageIO.write(region.getLastScreenImage().getImage(), "PNG", new File(pathname));
 				} catch (IOException e) {

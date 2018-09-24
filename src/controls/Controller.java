@@ -14,27 +14,34 @@ public class Controller {
 
 	protected Screen screen = Screen.getPrimaryScreen();
 
-	public boolean click(Pattern image) {
+	public boolean click(Pattern... images) {
 		try {
-			return click(image, false);
-		} catch (ClickException ignored) {} // Never will be pass here
+			return click(false, images);
+		} catch (ClickException ignored) {
+		} // Never will be pass here
 
 		return false;
 	}
 
-	public boolean click(Pattern image, boolean throwException) throws ClickException {
-		try {
-			screen.click(image);
-			log.log(Level.INFO, image + " was clicked.");
-		} catch (Exception e) {
-			log.log(Level.ERROR, "Click error");
-			if (e.getMessage().contains("ImageMissing")) {
-				log.log(Level.ERROR, "Image missing: " + image);
+	public boolean click(boolean throwException, Pattern... images) throws ClickException {
+		for (Pattern image : images) {
+			try {
+				screen.exists(image).highlight(1);
+				screen.click(image);
+				log.log(Level.INFO, image + " was clicked.");
+			} catch (Exception e) {
+				log.log(Level.ERROR, String.format("Click error in %s", image));
+
+				if (e.getMessage() != null && e.getMessage().contains("ImageMissing")) {
+					log.log(Level.ERROR, "Image missing: " + image);
+				}
+
+				if (throwException) {
+					throw new ClickException();
+				}
+
+				return false;
 			}
-			if (throwException) {
-				throw new ClickException();
-			}
-			return false;
 		}
 		return true;
 	}
@@ -42,7 +49,8 @@ public class Controller {
 	public String read(Region region, String needle, float timeout) {
 		try {
 			return read(region, needle, timeout, false);
-		} catch (TextNotFoundException ignored) {} // Never will be pass here
+		} catch (TextNotFoundException ignored) {
+		} // Never will be pass here
 
 		return "";
 	}

@@ -11,11 +11,13 @@ public class Images{
 
 	public static class Explorer  {
 		public static Pattern CAMP;
+		public static Pattern SPYGLASS;
 		public static Pattern EXPLORE_BUTTON;
 
 		static void init() {
-			CAMP = ImageManager.getImage("camp").similar(0.6d);
-			EXPLORE_BUTTON = ImageManager.getImage("exploreButton");
+			CAMP = ImageManager.getImage("camp").similar(0.6);
+			SPYGLASS = ImageManager.getImage("spyglass");
+			EXPLORE_BUTTON = ImageManager.getImage("explore_button");
 		}
 	}
 
@@ -29,12 +31,16 @@ public class Images{
 	}
 
 	public static class Common {
+		public static Pattern CLOSE_BUTTON;
 		public static Pattern HOME;
 		public static Pattern MAP;
+		public static Pattern SEND_TROOPS;
 
 		public static void init() {
 			HOME = ImageManager.getImage("home");
 			MAP = ImageManager.getImage("map");
+			CLOSE_BUTTON = ImageManager.getImage("close_button");
+			SEND_TROOPS = ImageManager.getImage("send_troops");
 		}
 	}
 }

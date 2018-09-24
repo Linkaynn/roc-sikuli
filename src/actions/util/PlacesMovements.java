@@ -7,7 +7,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.sikuli.script.Pattern;
-import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class PlacesMovements {
 	public static ArrayList<Movements> CAMP_MOVEMENTS;
 
 	public static void initializeMovements() {
-		new CommonActions().centerInHome();
+		new UtilActions().centerInHome();
 
 		if (CAMP_MOVEMENTS == null) {
 			CAMP_MOVEMENTS = searchFor(new Pattern[] {Images.Explorer.CAMP});
@@ -40,6 +39,7 @@ public class PlacesMovements {
 		Predicate<Pattern> imageExist = (image) -> screen.exists(image) != null;
 
 		if (Arrays.stream(images).anyMatch(imageExist)) {
+			log.log(Level.INFO, String.format("Found! - %s", imagesByName));
 			return movements;
 		}
 
