@@ -27,7 +27,7 @@ public class ROC extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		Settings.initialize();
-		initializeMovements();
+//		initializeMovements();
 
 		new ExploreAction().start();
 

@@ -20,7 +20,7 @@ public class ExploreAction extends Action {
 
 		log.log(Level.INFO, "Starting exploring...");
 
-		if (!goHome()) {
+		if (!centerInHome()) {
 			log.log(Level.WARN, "Can not go home");
 			return false;
 		}
