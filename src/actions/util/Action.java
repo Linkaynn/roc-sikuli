@@ -10,20 +10,22 @@ import org.sikuli.script.Location;
 import org.sikuli.script.Mouse;
 import org.sikuli.script.Pattern;
 
-public class CommonActions extends Controller {
-	private static Logger log = LogManager.getLogger(CommonActions.class);
+public abstract class Action extends Controller {
+	private static Logger log = LogManager.getLogger(Action.class);
+
+	public abstract boolean start();
 
 	public boolean goHome() {
 		Pattern HOME = Images.Common.HOME;
 
 		log.log(Level.INFO, "Going home");
-		boolean success = !exists(HOME) || click(HOME);
+		boolean success = click(HOME);
 
 		if (success) {
 			zoomOut(5);
 		}
 
-		return success;
+		return !exists(HOME) || success;
 	}
 
 	public void zoomOut(int levels) {

@@ -7,10 +7,10 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.sikuli.script.Pattern;
 
-public class Explore extends Action {
-	private static Logger log = LogManager.getLogger(Explore.class);
+public class ExploreAction extends Action {
+	private static Logger log = LogManager.getLogger(ExploreAction.class);
 
-	public static boolean EXPLORING = false;
+	public static boolean EXPLORING = true;
 
 	private int explorersAvailable = 0;
 
@@ -64,11 +64,11 @@ public class Explore extends Action {
 	}
 
 	private boolean openCamp() {
-		return click(Images.Explorer.CAMP, Images.Explorer.EXPLORE_BUTTON);
+		return click(Images.Explorer.CAMP, Images.Explorer.SPYGLASS);
 	}
 
 	private int getExplorerAvailableCount() {
-		return screen.findAllList(Images.Explorer.EXPLORER_AVATAR).size();
+		return screen.findAllList(Images.Explorer.EXPLORE_BUTTON).size();
 	}
 
 	private boolean selectExplorer() {
@@ -78,7 +78,7 @@ public class Explore extends Action {
 	}
 
 	private boolean sendExplorer() {
-		return click(Images.Common.);
+		return click(Images.Common.SEND_TROOPS);
 	}
 
 	@Override
