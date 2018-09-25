@@ -1,4 +1,4 @@
-package endpoint.model;
+package server.endpoints.model;
 
 public class Message {
 	private String from;

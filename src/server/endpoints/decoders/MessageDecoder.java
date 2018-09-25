@@ -1,7 +1,7 @@
-package endpoint.decoders;
+package server.endpoints.decoders;
 
 import com.google.gson.Gson;
-import endpoint.model.Message;
+import server.endpoints.model.Message;
 
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
