@@ -5,15 +5,25 @@ import images.Images;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.sikuli.script.Image;
 import org.sikuli.script.Pattern;
 
 public class ExploreAction extends Action {
 	private static Logger log = LogManager.getLogger(ExploreAction.class);
 
-	public static boolean EXPLORING = true;
+	private static ExploreAction instance = null;
 
+	public static boolean EXPLORING = true;
 	private int explorersAvailable = 0;
+
+	protected ExploreAction() {}
+
+	public static ExploreAction instance() {
+		if (instance == null) {
+			instance = new ExploreAction();
+		}
+
+		return instance;
+	}
 
 	@Override
 	public boolean start() {
@@ -92,6 +102,7 @@ public class ExploreAction extends Action {
 	}
 
 	private void closeAllWindows() {
-		while (click(Images.Common.CLOSE_BUTTON)) {}
+		while (click(Images.Common.CLOSE_BUTTON)) {
+		}
 	}
 }
