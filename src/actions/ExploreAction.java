@@ -7,12 +7,13 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.sikuli.script.Pattern;
 
+import static status.Status.EXPLORING;
+
 public class ExploreAction extends Action {
 	private static Logger log = LogManager.getLogger(ExploreAction.class);
 
 	private static ExploreAction instance = null;
 
-	public static boolean EXPLORING = true;
 	private int explorersAvailable = 0;
 
 	protected ExploreAction() {}

@@ -1,7 +1,5 @@
 package settings;
 
-import actions.ExploreAction;
-import main.ROC;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -12,6 +10,8 @@ import org.sikuli.script.KeyModifier;
 
 import java.awt.*;
 
+import static status.Status.*;
+
 public class KeysHandler {
 	private static Logger log = LogManager.getLogger(KeysHandler.class);
 
@@ -19,6 +19,7 @@ public class KeysHandler {
 		addExitHandler();
 		addRunningHandler();
 		addExploringToggleHandler();
+		log.log(Level.INFO, "Added the handlers");
 	}
 
 	private static void addExploringToggleHandler() {
@@ -26,9 +27,9 @@ public class KeysHandler {
 			@Override
 			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
 				Toolkit.getDefaultToolkit().beep();
-				ExploreAction.EXPLORING = !ExploreAction.EXPLORING;
+				EXPLORING = !EXPLORING;
 
-				String message = ExploreAction.EXPLORING ? "Exploring was activated" : "Exploring was deactivated";
+				String message = EXPLORING ? "Exploring was activated" : "Exploring was deactivated";
 				log.log(Level.INFO, message);
 			}
 		});
@@ -39,8 +40,8 @@ public class KeysHandler {
 			@Override
 			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
 				Toolkit.getDefaultToolkit().beep();
-				ExploreAction.EXPLORING = false;
-				ROC.RUNNING = false;
+				EXPLORING = false;
+				RUNNING = false;
 
 				log.log(Level.INFO, "The app was deactivated");
 			}
