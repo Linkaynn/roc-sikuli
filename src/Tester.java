@@ -11,8 +11,6 @@ import settings.Settings;
 
 import java.awt.*;
 
-import static actions.util.PlacesMovements.initializeMovements;
-
 public class Tester extends Application{
 	public static void main(String[] args)
 	{

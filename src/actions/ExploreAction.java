@@ -5,6 +5,7 @@ import images.Images;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.sikuli.script.Image;
 import org.sikuli.script.Pattern;
 
 public class ExploreAction extends Action {
@@ -20,7 +21,7 @@ public class ExploreAction extends Action {
 
 		log.log(Level.INFO, "Starting exploring...");
 
-		if (!centerInHome()) {
+		if (!exists(Images.Explorer.CAMP) && !centerInHome()) {
 			log.log(Level.WARN, "Can not go home");
 			return false;
 		}

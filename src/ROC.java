@@ -9,11 +9,8 @@ import settings.Settings;
 
 import java.awt.*;
 
-import static actions.util.PlacesMovements.initializeMovements;
-
-public class ROC extends Application{
-	public static void main(String[] args)
-	{
+public class ROC extends Application {
+	public static void main(String[] args) {
 		Key.addHotkey("q", KeyModifier.CTRL, new HotkeyListener() {
 			@Override
 			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
@@ -27,11 +24,12 @@ public class ROC extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		Settings.initialize();
-//		initializeMovements();
 
-		new ExploreAction().start();
+		int tries = 200;
 
-		Toolkit.getDefaultToolkit().beep();
-		Toolkit.getDefaultToolkit().beep();
+		ExploreAction exploreAction = new ExploreAction();
+		while (true) {
+			exploreAction.start();
+		}
 	}
 }
