@@ -10,7 +10,8 @@ import org.sikuli.script.KeyModifier;
 
 import java.awt.*;
 
-import static status.Status.*;
+import static status.Status.EXPLORING;
+import static status.Status.RUNNING;
 
 public class KeysHandler {
 	private static Logger log = LogManager.getLogger(KeysHandler.class);
