@@ -7,7 +7,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.sikuli.script.Pattern;
 
-import static status.Status.EXPLORING;
+import static status.State.EXPLORING;
 
 public class ExploreAction extends Action {
 	private static Logger log = LogManager.getLogger(ExploreAction.class);

@@ -10,8 +10,8 @@ import org.sikuli.script.KeyModifier;
 
 import java.awt.*;
 
-import static status.Status.EXPLORING;
-import static status.Status.RUNNING;
+import static status.State.EXPLORING;
+import static status.State.RUNNING;
 
 public class KeysHandler {
 	private static Logger log = LogManager.getLogger(KeysHandler.class);
@@ -23,19 +23,6 @@ public class KeysHandler {
 		log.log(Level.INFO, "Added the handlers");
 	}
 
-	private static void addExploringToggleHandler() {
-		Key.addHotkey(Key.F2, KeyModifier.CTRL, new HotkeyListener() {
-			@Override
-			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
-				Toolkit.getDefaultToolkit().beep();
-				EXPLORING = !EXPLORING;
-
-				String message = EXPLORING ? "Exploring was activated" : "Exploring was deactivated";
-				log.log(Level.INFO, message);
-			}
-		});
-	}
-
 	private static void addRunningHandler() {
 		Key.addHotkey(Key.F1, KeyModifier.CTRL, new HotkeyListener() {
 			@Override
@@ -45,6 +32,19 @@ public class KeysHandler {
 				RUNNING = false;
 
 				log.log(Level.INFO, "The app was deactivated");
+			}
+		});
+	}
+
+	private static void addExploringToggleHandler() {
+		Key.addHotkey(Key.F2, KeyModifier.CTRL, new HotkeyListener() {
+			@Override
+			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
+				Toolkit.getDefaultToolkit().beep();
+				EXPLORING = !EXPLORING;
+
+				String message = EXPLORING ? "Exploring was activated" : "Exploring was deactivated";
+				log.log(Level.INFO, message);
 			}
 		});
 	}

@@ -15,7 +15,7 @@ public class Images{
 		public static Pattern EXPLORE_BUTTON;
 
 		static void init() {
-			CAMP = ImageManager.getImage("camp").similar(0.6);
+			CAMP = ImageManager.getImage("camp").similar(0.5);
 			SPYGLASS = ImageManager.getImage("spyglass");
 			EXPLORE_BUTTON = ImageManager.getImage("explore_button");
 		}

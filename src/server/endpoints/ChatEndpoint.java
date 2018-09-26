@@ -2,7 +2,6 @@ package server.endpoints;
 
 import org.webbitserver.BaseWebSocketHandler;
 import org.webbitserver.WebSocketConnection;
-import status.Status;
 
 public class ChatEndpoint extends BaseWebSocketHandler {
 	private int connectionCount;
