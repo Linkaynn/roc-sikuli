@@ -62,7 +62,7 @@ public class Patterns {
 			CLOSE_BUTTON = ImageManager.getImage("close_button");
 			SEND_TROOPS = ImageManager.getImage("send_troops");
 			VERIFY_BUTTON = ImageManager.getImage("verify_button");
-			TIMING_REGION = new Region(1476, 206, 70, 27);
+			TIMING_REGION = new Region(1262, 443, 81, 30);
 		}
 	}
 }
