@@ -1,2 +1,4 @@
 <app-top-nav></app-top-nav>
-<app-console-output [log]="log"></app-console-output>
+<div *ngIf="state" class="container">
+  <app-console-output [logLines]="state.logLines"></app-console-output>
+</div>

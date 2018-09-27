@@ -52,12 +52,14 @@ public class Patterns {
 		public static Pattern HOME;
 		public static Pattern MAP;
 		public static Pattern SEND_TROOPS;
+		public static Pattern VERIFY_BUTTON;
 
 		public static void init() {
 			HOME = ImageManager.getImage("home");
 			MAP = ImageManager.getImage("map");
 			CLOSE_BUTTON = ImageManager.getImage("close_button");
 			SEND_TROOPS = ImageManager.getImage("send_troops");
+			VERIFY_BUTTON = ImageManager.getImage("verify_button");
 		}
 	}
 }

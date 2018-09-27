@@ -1,3 +1,7 @@
-<div class="console">
-  {{log}}
+<div class="console pt-2 pb-2 mt-3 mb-3" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+  <span class="d-block pl-1 pr-1" *ngFor="let line of logLines"
+        [ngClass]="{
+        'error-message': line.includes(' ERROR '),
+        'warn-message': line.includes(' WARN ')
+        }">{{line}}</span>
 </div>

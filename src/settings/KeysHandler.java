@@ -23,7 +23,7 @@ public class KeysHandler {
 	private static Logger log = LogManager.getLogger(KeysHandler.class);
 
 	public static void init() {
-		addBasicsHandler();
+//		addBasicsHandler();
 		addExitHandler();
 		addRunningHandler();
 		addExploringToggleHandler();

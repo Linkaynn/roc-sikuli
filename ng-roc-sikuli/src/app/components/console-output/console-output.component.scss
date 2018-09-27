@@ -1,0 +1,16 @@
+@import "../../../sass/vendor/variables";
+@import "../../../sass/vendor/util";
+
+.console {
+  border: 1px solid $brand-color-light;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.error-message {
+  background-color: $red;
+}
+
+.warn-message {
+  background-color: $orange;
+}

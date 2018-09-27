@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {StatusService} from "./services/status.service";
+import {ROCState} from "./model/roc-state";
 
 @Component({
   selector: 'app-root',
@@ -8,12 +9,17 @@ import {StatusService} from "./services/status.service";
 })
 export class AppComponent {
 
-  log: string = "";
+  state: ROCState;
 
   constructor(private statusService: StatusService) {
-    statusService.getStatus().then((res) => {
-      console.log(res)
-    })
+    setInterval(() => this.retrieveStatus(), 500);
   }
 
+  private retrieveStatus() {
+    this.statusService.getStatus().then((res) => {
+      if (res.data) {
+        this.state = ROCState.fromJSON(res.data)
+      }
+    })
+  }
 }
