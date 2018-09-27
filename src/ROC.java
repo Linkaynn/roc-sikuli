@@ -1,16 +1,20 @@
 import actions.ExploreAction;
+import actions.util.UtilActions;
 import images.Patterns;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.sikuli.script.FindFailed;
-import org.sikuli.script.Screen;
+import org.sikuli.basics.HotkeyEvent;
+import org.sikuli.basics.HotkeyListener;
+import org.sikuli.script.*;
 import server.Server;
 import settings.KeysHandler;
 import settings.Settings;
 import status.Status;
+
+import java.awt.*;
 
 import static status.State.*;
 
@@ -24,7 +28,7 @@ public class ROC extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws InterruptedException, FindFailed {
+	public void start(Stage primaryStage) throws InterruptedException {
 		Settings.initialize();
 		Server.init();
 		KeysHandler.init();
@@ -40,6 +44,8 @@ public class ROC extends Application {
 		}
 
 		log.log(Level.INFO, "Process ends here");
+
+		changeStatus(Status.OFF);
 	}
 
 	private void changeStatus(Status status) {

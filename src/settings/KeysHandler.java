@@ -2,6 +2,7 @@ package settings;
 
 import actions.util.UtilActions;
 import images.Patterns;
+import javafx.application.Application;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -23,16 +24,15 @@ public class KeysHandler {
 	private static Logger log = LogManager.getLogger(KeysHandler.class);
 
 	public static void init() {
-//		addBasicsHandler();
+		addBasicsHandler();
 		addExitHandler();
-		addRunningHandler();
 		addExploringToggleHandler();
 		addMapElementsSearchToggleHandler();
 		log.log(Level.INFO, "Added the handlers");
 	}
 
 	private static void addBasicsHandler() {
-		Key.addHotkey("z", 0, new HotkeyListener() {
+		Key.addHotkey("z", KeyModifier.CTRL + KeyModifier.CMD, new HotkeyListener() {
 			@Override
 			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
 				Toolkit.getDefaultToolkit().beep();
@@ -83,19 +83,6 @@ public class KeysHandler {
 		Key.addHotkey("d", KeyModifier.ALT, hotkeyListener);
 	}
 
-	private static void addRunningHandler() {
-		Key.addHotkey(Key.F1, KeyModifier.CTRL, new HotkeyListener() {
-			@Override
-			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
-				Toolkit.getDefaultToolkit().beep();
-				EXPLORING = false;
-				RUNNING = false;
-
-				log.log(Level.INFO, "The app was deactivated");
-			}
-		});
-	}
-
 	private static void addExploringToggleHandler() {
 		Key.addHotkey(Key.F2, KeyModifier.CTRL, new HotkeyListener() {
 			@Override
@@ -115,7 +102,10 @@ public class KeysHandler {
 			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
 				Toolkit.getDefaultToolkit().beep();
 				log.log(Level.WARN, "The app was force quit");
-				System.exit(0);
+				try {
+					Thread.sleep(1000);
+					System.exit(0);
+				} catch (InterruptedException ignored) {}
 			}
 		});
 	}

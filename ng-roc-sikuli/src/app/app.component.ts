@@ -9,17 +9,31 @@ import {ROCState} from "./model/roc-state";
 })
 export class AppComponent {
 
-  state: ROCState;
+  state: ROCState = new ROCState();
+
+  private interval: number;
+  private loading = false;
 
   constructor(private statusService: StatusService) {
-    setInterval(() => this.retrieveStatus(), 500);
+    this.interval = setInterval(() => this.retrieveStatus(), 500);
   }
 
   private retrieveStatus() {
+    if (this.loading) return;
+
+    this.loading = true;
     this.statusService.getStatus().then((res) => {
+      this.loading = false;
+
       if (res.data) {
         this.state = ROCState.fromJSON(res.data)
       }
+    }).catch(() => {
+      this.loading = false;
+      
+      this.state.currentStatus = "OFFLINE";
+      clearInterval(this.interval);
+      this.interval = setInterval(() => this.retrieveStatus(), 5000);
     })
   }
 }

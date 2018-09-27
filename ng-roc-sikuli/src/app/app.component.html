@@ -1,4 +1,8 @@
 <app-top-nav></app-top-nav>
-<div *ngIf="state" class="container">
+<div *ngIf="state" class="container pt-3">
+  <div>
+    <h6 class="bold pb-0 mb-0">Current status</h6>
+    <span>{{state.currentStatus}}</span>
+  </div>
   <app-console-output [logLines]="state.logLines"></app-console-output>
 </div>

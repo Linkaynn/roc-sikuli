@@ -1,4 +1,6 @@
-<div class="console pt-2 pb-2 mt-3 mb-3" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+<h6 class="bold pb-0 mb-0 mt-3">Console output</h6>
+<div class="console pt-2 pb-2 mb-3" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+  <h5 *ngIf="logLines?.length == 0" class="mt-2 bold text-center">Not output yet</h5>
   <span class="d-block pl-1 pr-1" *ngFor="let line of logLines"
         [ngClass]="{
         'error-message': line.includes(' ERROR '),
