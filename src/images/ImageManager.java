@@ -55,4 +55,29 @@ public class ImageManager {
 		}
 		return new Pattern(pathname);
 	}
+
+	/**
+	 * Only testing porpouse
+	 * @return
+	 */
+	public static Region getRegion() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText("Take new region");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			log.log(Level.INFO, "Getting image");
+
+			while (true) {
+				Region region = Screen.getPrimaryScreen().selectRegion("Select Area to capture as Image");
+
+				if (region == null) {
+					new Alert(AlertType.WARNING, "Try again when you want").showAndWait();
+				} else {
+					return region;
+				}
+			}
+		}
+		return null;
+	}
 }

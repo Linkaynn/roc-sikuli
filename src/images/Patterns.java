@@ -1,6 +1,7 @@
 package images;
 
 import org.sikuli.script.Pattern;
+import org.sikuli.script.Region;
 
 public class Patterns {
 	public static void init() {
@@ -53,6 +54,7 @@ public class Patterns {
 		public static Pattern MAP;
 		public static Pattern SEND_TROOPS;
 		public static Pattern VERIFY_BUTTON;
+		public static Region TIMING_REGION;
 
 		public static void init() {
 			HOME = ImageManager.getImage("home");
@@ -60,6 +62,7 @@ public class Patterns {
 			CLOSE_BUTTON = ImageManager.getImage("close_button");
 			SEND_TROOPS = ImageManager.getImage("send_troops");
 			VERIFY_BUTTON = ImageManager.getImage("verify_button");
+			TIMING_REGION = new Region(1476, 206, 70, 27);
 		}
 	}
 }

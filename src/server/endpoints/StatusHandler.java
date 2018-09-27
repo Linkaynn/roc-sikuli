@@ -8,8 +8,9 @@ import org.webbitserver.HttpHandler;
 import org.webbitserver.HttpRequest;
 import org.webbitserver.HttpResponse;
 import server.endpoints.lightweight.ROCState;
+import server.endpoints.lightweight.StatisticsLight;
 import status.State;
-import status.Status;
+import status.Statistics;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +19,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -41,9 +41,16 @@ public class StatusHandler extends BaseHandler implements HttpHandler {
 		ROCState state = new ROCState();
 
 		state.setCurrentStatus(State.CURRENT_STATUS);
+		setStatistics(state);
 		retrieveLogLines(state);
 
 		ok(new OkMessage(state));
+	}
+
+	private void setStatistics(ROCState state) {
+		StatisticsLight statistics = new StatisticsLight();
+		statistics.setExploredTimes(Statistics.EXPLORED_TIMES);
+		state.setStatistics(statistics);
 	}
 
 	private void retrieveLogLines(ROCState state) {

@@ -6,6 +6,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.sikuli.script.Pattern;
+import status.Statistics;
 
 import static status.State.EXPLORING;
 
@@ -67,6 +68,8 @@ public class ExploreAction extends Action {
 		}
 
 		explorersAvailable--;
+
+		Statistics.EXPLORED_TIMES++;
 
 		if (explorersAvailable > 0) {
 			return start();

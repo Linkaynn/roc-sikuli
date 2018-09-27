@@ -1,7 +1,6 @@
 import images.Patterns;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.sikuli.script.Screen;
 import settings.KeysHandler;
 import settings.Settings;
 
@@ -15,7 +14,10 @@ public class Tester extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		Settings.initialize();
+		Patterns.init();
 
-		Screen.getPrimaryScreen().exists(Patterns.Explorer.SPYGLASS).highlight(3);
+		while (true) {
+			System.out.println(Patterns.Common.TIMING_REGION.text());
+		}
 	}
 }

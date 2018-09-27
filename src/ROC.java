@@ -12,6 +12,7 @@ import org.sikuli.script.*;
 import server.Server;
 import settings.KeysHandler;
 import settings.Settings;
+import status.Statistics;
 import status.Status;
 
 import java.awt.*;
@@ -49,8 +50,10 @@ public class ROC extends Application {
 	}
 
 	private void changeStatus(Status status) {
-		CURRENT_STATUS = status;
-		log.log(Level.INFO, String.format("Change status to %s", status));
+		if (CURRENT_STATUS != status) {
+			CURRENT_STATUS = status;
+			log.log(Level.INFO, String.format("Change status to %s", status));
+		}
 	}
 
 	private void checkIfIAmIdle() {
