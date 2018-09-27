@@ -1,6 +1,6 @@
 package settings;
 
-import images.Images;
+import images.Patterns;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -13,7 +13,7 @@ public class Settings {
 	public static void initialize() {
 		org.sikuli.basics.Settings.DebugLogs = false;
 		PropertyConfigurator.configure("log4j.properties");
-		Images.init();
+		Patterns.init();
 		ImagePath.add("images/");
 
 		log.log(Level.INFO, "Settings initialized");

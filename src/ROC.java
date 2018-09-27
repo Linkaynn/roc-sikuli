@@ -1,21 +1,22 @@
 import actions.ExploreAction;
+import images.Patterns;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.sikuli.script.FindFailed;
+import org.sikuli.script.Screen;
 import server.Server;
 import settings.KeysHandler;
 import settings.Settings;
 import status.Status;
 
-import static status.State.EXPLORING;
-import static status.State.RUNNING;
+import static status.State.*;
 
 public class ROC extends Application {
 	private static Logger log = LogManager.getLogger(ROC.class);
 
-	private Status currentStatus = Status.IDLE;
 	private ExploreAction exploreAction = ExploreAction.instance();
 
 	public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class ROC extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws InterruptedException {
+	public void start(Stage primaryStage) throws InterruptedException, FindFailed {
 		Settings.initialize();
 		Server.init();
 		KeysHandler.init();
@@ -35,19 +36,19 @@ public class ROC extends Application {
 				exploreAction.start();
 			}
 
-			if (currentStatus == Status.IDLE) Thread.sleep(1000);
+			if (CURRENT_STATUS == Status.IDLE) Thread.sleep(1000);
 		}
 
 		log.log(Level.INFO, "Process ends here");
 	}
 
 	private void changeStatus(Status status) {
-		currentStatus = status;
+		CURRENT_STATUS = status;
 		log.log(Level.INFO, String.format("Change status to %s", status));
 	}
 
 	private void checkIfIAmIdle() {
-		if (currentStatus != Status.IDLE && !EXPLORING) {
+		if (CURRENT_STATUS != Status.IDLE && !EXPLORING) {
 			changeStatus(Status.IDLE);
 		}
 	}

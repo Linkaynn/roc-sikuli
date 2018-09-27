@@ -2,10 +2,11 @@ package images;
 
 import org.sikuli.script.Pattern;
 
-public class Images{
+public class Patterns {
 	public static void init() {
 		Explorer.init();
 		Common.init();
+		Map.init();
 		Test.init();
 	}
 
@@ -27,6 +28,22 @@ public class Images{
 
 		static void init() {
 			WINDOWS = ImageManager.getImage("windows");
+		}
+	}
+
+	public static class Map {
+		public static Pattern GOLD_SYMBOL;
+		public static Pattern WOOD_SYMBOL;
+		public static Pattern ROCK_SYMBOL;
+		public static Pattern FOOD_SYMBOL;
+		public static Pattern GEM_SYMBOL;
+
+		public static void init() {
+			GOLD_SYMBOL = ImageManager.getImage("gold_symbol").similar(0.8);
+			WOOD_SYMBOL = ImageManager.getImage("wood_symbol").similar(0.8);
+			ROCK_SYMBOL = ImageManager.getImage("rock_symbol").similar(0.8);
+			FOOD_SYMBOL = ImageManager.getImage("food_symbol").similar(0.8);
+			GEM_SYMBOL = ImageManager.getImage("gem_symbol").similar(0.8);
 		}
 	}
 

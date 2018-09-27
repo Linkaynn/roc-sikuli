@@ -1,7 +1,7 @@
 package actions;
 
 import actions.util.Action;
-import images.Images;
+import images.Patterns;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -32,7 +32,7 @@ public class ExploreAction extends Action {
 
 		log.log(Level.INFO, "Starting exploring...");
 
-		if (!exists(Images.Explorer.CAMP) && !centerInHome()) {
+		if (!exists(Patterns.Explorer.CAMP) && !centerInHome()) {
 			log.log(Level.WARN, "Can not go home");
 			return false;
 		}
@@ -76,21 +76,21 @@ public class ExploreAction extends Action {
 	}
 
 	private boolean openCamp() {
-		return click(Images.Explorer.CAMP, Images.Explorer.SPYGLASS);
+		return click(Patterns.Explorer.CAMP, Patterns.Explorer.SPYGLASS);
 	}
 
 	private int getExplorerAvailableCount() {
-		return screen.findAllList(Images.Explorer.EXPLORE_BUTTON).size();
+		return screen.findAllList(Patterns.Explorer.EXPLORE_BUTTON).size();
 	}
 
 	private boolean selectExplorer() {
-		boolean result = click(Images.Explorer.EXPLORE_BUTTON);
+		boolean result = click(Patterns.Explorer.EXPLORE_BUTTON);
 		sleep(0.5f);
-		return result && click(Images.Explorer.EXPLORE_BUTTON);
+		return result && click(Patterns.Explorer.EXPLORE_BUTTON);
 	}
 
 	private boolean sendExplorer() {
-		return click(Images.Common.SEND_TROOPS);
+		return click(Patterns.Common.SEND_TROOPS);
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class ExploreAction extends Action {
 	}
 
 	private void closeAllWindows() {
-		while (click(Images.Common.CLOSE_BUTTON)) {
+		while (click(Patterns.Common.CLOSE_BUTTON)) {
 		}
 	}
 }

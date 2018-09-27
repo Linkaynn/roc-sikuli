@@ -1,4 +1,4 @@
-import images.Images;
+import images.Patterns;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.sikuli.script.Screen;
@@ -16,6 +16,6 @@ public class Tester extends Application{
 	public void start(Stage primaryStage) {
 		Settings.initialize();
 
-		Screen.getPrimaryScreen().exists(Images.Explorer.SPYGLASS).highlight(3);
+		Screen.getPrimaryScreen().exists(Patterns.Explorer.SPYGLASS).highlight(3);
 	}
 }

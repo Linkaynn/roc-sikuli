@@ -1,7 +1,7 @@
 package actions.util;
 
 import controls.Controller;
-import images.Images;
+import images.Patterns;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -16,7 +16,7 @@ public abstract class Action extends Controller {
 	public abstract boolean start();
 
 	public boolean goHome() {
-		Pattern HOME = Images.Common.HOME;
+		Pattern HOME = Patterns.Common.HOME;
 
 		log.log(Level.INFO, "Going home");
 		boolean success = click(HOME);
@@ -28,6 +28,11 @@ public abstract class Action extends Controller {
 		return !exists(HOME) || success;
 	}
 
+	public void zoomOut() {
+		zoomOut(9);
+		zoomOut(7);
+	}
+
 	public void zoomOut(int levels) {
 		Mouse.move(new Location(screen.w / 2, screen.h / 2));
 		screen.keyDown(Key.CTRL);
@@ -37,7 +42,7 @@ public abstract class Action extends Controller {
 	}
 
 	public boolean goMap() {
-		Pattern MAP = Images.Common.MAP;
+		Pattern MAP = Patterns.Common.MAP;
 
 		log.log(Level.INFO, "Going map");
 		return !exists(MAP) || click(MAP);
