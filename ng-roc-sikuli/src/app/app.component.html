@@ -12,4 +12,6 @@
     </div>
   </div>
   <app-console-output [logLines]="state.logLines"></app-console-output>
+
+  <img *ngIf="this.lastImage" class="img-fluid" [src]="this.lastImage">
 </div>

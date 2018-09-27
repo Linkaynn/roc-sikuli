@@ -97,7 +97,7 @@ public class KeysHandler {
 	}
 
 	private static void addExitHandler() {
-		Key.addHotkey("q", KeyModifier.CTRL, new HotkeyListener() {
+		Key.addHotkey("q", KeyModifier.CTRL + KeyModifier.ALT, new HotkeyListener() {
 			@Override
 			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
 				Toolkit.getDefaultToolkit().beep();

@@ -51,6 +51,10 @@ export class BaseService {
     return (mapFunction ? observableResult.map(mapFunction) : observableResult).toPromise();
   }
 
+  protected getFile(endpoint) {
+    return this.http.get(BaseService.BASE_URL + this.insertSlashIfNeeded(endpoint) + endpoint, { responseType: 'blob' }).toPromise()
+  }
+
   private buildHeader() {
     let headers = new HttpHeaders();
     let session_token = localStorage.getItem(BaseService.SESSION_TOKEN_KEY);

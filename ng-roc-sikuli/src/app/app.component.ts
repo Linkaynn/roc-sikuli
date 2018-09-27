@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {StatusService} from "./services/status.service";
 import {ROCState} from "./model/roc-state";
+import {DomSanitizer} from "@angular/platform-browser";
+import {ImageHelper} from "./helpers/image-helper";
 
 @Component({
   selector: 'app-root',
@@ -11,10 +13,12 @@ export class AppComponent {
 
   state: ROCState = new ROCState();
 
-  private intervalTime: number = 500;
+  lastImage: any;
+
+  private intervalTime: number = 2500;
   private loading = false;
 
-  constructor(private statusService: StatusService) {
+  constructor(private statusService: StatusService, private sanitizer: DomSanitizer) {
     this.timeout();
   }
 
@@ -27,13 +31,14 @@ export class AppComponent {
 
     this.loading = true;
     this.statusService.getStatus().then((res) => {
-      this.loading = false;
 
       if (res.data) {
         this.state.update(res.data);
+
+        this.retrieveLastImage();
       }
 
-      this.intervalTime = 500;
+      this.intervalTime = 2500;
       this.timeout()
     }).catch(() => {
       this.loading = false;
@@ -44,4 +49,26 @@ export class AppComponent {
       this.timeout()
     })
   }
+
+  private retrieveLastImage() {
+    this.statusService.getImage().then((value: Blob) => {
+      this.loading = false;
+      this.createImageFromBlob(value);
+    }).catch((err) => {
+      this.loading = false;
+      console.error(err);
+    })
+  }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.lastImage = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+
 }

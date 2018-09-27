@@ -12,4 +12,8 @@ export class StatusService extends BaseService{
   getStatus() {
     return this.get("status");
   }
+
+  getImage(): Promise<Blob> {
+    return this.getFile("lastImage");
+  }
 }

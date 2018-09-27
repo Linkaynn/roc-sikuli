@@ -5,6 +5,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.webbitserver.WebServer;
 import org.webbitserver.WebServers;
+import server.endpoints.ImageHandler;
 import server.endpoints.StatusHandler;
 
 import java.util.concurrent.ExecutionException;
@@ -16,6 +17,7 @@ public class Server {
 		try {
 			WebServer webServer = WebServers.createWebServer(8080)
 					.add("/api/status", new StatusHandler())
+					.add("/api/lastImage", new ImageHandler())
 					.start().get();
 			log.log(Level.INFO, String.format("Server started at %s", webServer.getUri()));
 		} catch (InterruptedException | ExecutionException e) {

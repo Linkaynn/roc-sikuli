@@ -3,6 +3,7 @@
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.sikuli.script.Screen;
 import org.webbitserver.HttpControl;
 import org.webbitserver.HttpHandler;
 import org.webbitserver.HttpRequest;
@@ -12,6 +13,12 @@ import server.endpoints.lightweight.StatisticsLight;
 import status.State;
 import status.Statistics;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -37,9 +44,12 @@ public class ImageHandler extends BaseHandler implements HttpHandler {
 	@Override
 	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) {
 		this.response = response;
-
-
-
-//		ok(new OkMessage(state));
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(Screen.getPrimaryScreen().capture().getImage(), "png", baos);
+			baos.flush();
+			sendFile(baos.toByteArray());
+			baos.close();
+		} catch (IOException ignored) {}
 	}
 }
