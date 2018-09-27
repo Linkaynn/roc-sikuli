@@ -11,11 +11,15 @@ export class AppComponent {
 
   state: ROCState = new ROCState();
 
-  private interval: number;
+  private intervalTime: number = 500;
   private loading = false;
 
   constructor(private statusService: StatusService) {
-    this.interval = setInterval(() => this.retrieveStatus(), 500);
+    this.timeout();
+  }
+
+  private timeout() {
+    setTimeout(() => this.retrieveStatus(), this.intervalTime);
   }
 
   private retrieveStatus() {
@@ -26,14 +30,18 @@ export class AppComponent {
       this.loading = false;
 
       if (res.data) {
-        this.state = ROCState.fromJSON(res.data)
+        this.state.update(res.data);
       }
+
+      this.intervalTime = 500;
+      this.timeout()
     }).catch(() => {
       this.loading = false;
-      
+
       this.state.currentStatus = "OFFLINE";
-      clearInterval(this.interval);
-      this.interval = setInterval(() => this.retrieveStatus(), 5000);
+
+      this.intervalTime = 5000;
+      this.timeout()
     })
   }
 }
