@@ -14,6 +14,10 @@ export class StatusService extends BaseService{
   }
 
   getImage(): Promise<Blob> {
-    return this.getFile("lastImage");
+    return this.getFile("last-image");
+  }
+
+  newSession() {
+    this.get("input", [{action: "new_session"}])
   }
 }

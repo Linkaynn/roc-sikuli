@@ -16,46 +16,59 @@ export class AppComponent {
   lastImage: any;
 
   private intervalTime: number = 2500;
-  private loading = false;
+  private loadingState = false;
+  private loadingImage = false;
 
   constructor(private statusService: StatusService, private sanitizer: DomSanitizer) {
     this.timeout();
   }
 
   private timeout() {
-    setTimeout(() => this.retrieveStatus(), this.intervalTime);
+    setTimeout(() => {
+      if (this.loadingImage || this.loadingState) return;
+
+      this.retrieveStatus();
+      this.retrieveLastImage();
+    }, this.intervalTime);
   }
 
   private retrieveStatus() {
-    if (this.loading) return;
+    if (this.loadingState) return;
 
-    this.loading = true;
+    this.loadingState = true;
     this.statusService.getStatus().then((res) => {
-
       if (res.data) {
         this.state.update(res.data);
-
-        this.retrieveLastImage();
       }
 
+      this.loadingState = false;
       this.intervalTime = 2500;
       this.timeout()
     }).catch(() => {
-      this.loading = false;
+      this.loadingState = false;
+      this.intervalTime = 5000;
+      this.timeout();
 
       this.state.currentStatus = "OFFLINE";
-
-      this.intervalTime = 5000;
-      this.timeout()
     })
   }
 
   private retrieveLastImage() {
+    if (this.loadingImage) return;
+
+    this.loadingImage = true;
+
     this.statusService.getImage().then((value: Blob) => {
-      this.loading = false;
       this.createImageFromBlob(value);
+
+      this.loadingImage = false;
+      this.intervalTime = 2500;
+      this.timeout()
     }).catch((err) => {
-      this.loading = false;
+      this.loadingImage = false;
+      this.intervalTime = 5000;
+      this.timeout();
+
       console.error(err);
     })
   }
@@ -71,4 +84,7 @@ export class AppComponent {
     }
   }
 
+  newSession() {
+    this.statusService.newSession()
+  }
 }

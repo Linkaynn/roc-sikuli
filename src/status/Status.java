@@ -1,5 +1,5 @@
 package status;
 
 public enum Status {
-	IDLE, EXPLORING, CHECKING, OFF
+	IDLE, EXPLORING, CHECKING, NO_SESSION, OFF
 }

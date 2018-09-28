@@ -9,6 +9,7 @@ import settings.KeysHandler;
 import settings.Settings;
 import status.Status;
 import util.BotChecker;
+import util.SessionChecker;
 
 import static status.State.*;
 
@@ -16,6 +17,8 @@ public class ROC extends Application {
 	private static Logger log = LogManager.getLogger(ROC.class);
 
 	private BotChecker botChecker = new BotChecker();
+	private SessionChecker sessionChecker = new SessionChecker();
+
 	private ExploreAction exploreAction = ExploreAction.instance();
 
 	public static void main(String[] args) {
@@ -29,7 +32,7 @@ public class ROC extends Application {
 		KeysHandler.init();
 
 		while (RUNNING) {
-			if (!botChecker.checking()) {
+			if (checkersStatusOK()) {
 				checkIfIAmIdle();
 				if (EXPLORING) {
 					changeStatus(Status.EXPLORING);
@@ -37,15 +40,34 @@ public class ROC extends Application {
 				}
 
 				if (CURRENT_STATUS == Status.IDLE) Thread.sleep(1000);
-			} else if (CURRENT_STATUS != Status.CHECKING) {
-				changeStatus(Status.CHECKING);
-				log.log(Level.WARN, "Bot checker activated with: " + botChecker.getText());
 			}
 		}
 
 		log.log(Level.INFO, "Process ends here");
 
 		changeStatus(Status.OFF);
+	}
+
+	private boolean checkersStatusOK() {
+		if (botChecker.checking()) {
+			if (CURRENT_STATUS != Status.CHECKING) {
+				changeStatus(Status.CHECKING);
+				log.log(Level.WARN, "Bot checker activated with: " + botChecker.getText());
+			}
+
+			return false;
+		}
+
+		if (sessionChecker.checking()) {
+			if (CURRENT_STATUS != Status.NO_SESSION) {
+				changeStatus(Status.NO_SESSION);
+				log.log(Level.WARN, "Other devise take the control.");
+			}
+
+			return false;
+		}
+
+		return true;
 	}
 
 	private void changeStatus(Status status) {

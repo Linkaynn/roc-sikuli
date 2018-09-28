@@ -1,12 +1,10 @@
 package server.endpoints;
 
+import io.javalin.Context;
+import io.javalin.Handler;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.webbitserver.HttpControl;
-import org.webbitserver.HttpHandler;
-import org.webbitserver.HttpRequest;
-import org.webbitserver.HttpResponse;
 import server.endpoints.lightweight.ROCState;
 import server.endpoints.lightweight.StatisticsLight;
 import status.State;
@@ -23,20 +21,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class StatusHandler extends BaseHandler implements HttpHandler {
+public class StatusHandler extends BaseHandler implements Handler {
 	private static Logger log = LogManager.getLogger(StatusHandler.class);
 
-	class OkMessage {
-		Object data;
-
-		public OkMessage(Object object) {
-			data = object;
-		}
-	}
-
 	@Override
-	public void handleHttpRequest(HttpRequest request, HttpResponse response, HttpControl control) {
-		this.response = response;
+	public void handle(Context context) {
+		this.context = context;
 
 		ROCState state = new ROCState();
 

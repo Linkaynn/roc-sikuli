@@ -26,7 +26,7 @@ public class Tester extends Application{
 				System.out.println(region.getRect());
 				System.out.println(region.text());
 			}
-			System.out.println(Patterns.Common.TIMING_REGION.text());
+//			System.out.println(Patterns.Common.TIMING_REGION.text());
 		}
 	}
 }

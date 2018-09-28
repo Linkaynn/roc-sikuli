@@ -8,6 +8,7 @@ public class Patterns {
 		Explorer.init();
 		Common.init();
 		Map.init();
+		Regions.init();
 		Test.init();
 	}
 
@@ -48,13 +49,24 @@ public class Patterns {
 		}
 	}
 
+	public static class Regions {
+		public static Region TIMING_REGION;
+		public static Region OTHER_DEVISE_SESSION_REGION;
+
+		public static void init() {
+			TIMING_REGION = new Region(1262, 443, 81, 30);
+			OTHER_DEVISE_SESSION_REGION = new Region(631, 478, 620, 34);
+		}
+	}
+
 	public static class Common {
 		public static Pattern CLOSE_BUTTON;
 		public static Pattern HOME;
 		public static Pattern MAP;
 		public static Pattern SEND_TROOPS;
 		public static Pattern VERIFY_BUTTON;
-		public static Region TIMING_REGION;
+		public static Pattern CONFIRM_BUTTON;
+		public static Pattern ROC_ICON;
 
 		public static void init() {
 			HOME = ImageManager.getImage("home");
@@ -62,7 +74,8 @@ public class Patterns {
 			CLOSE_BUTTON = ImageManager.getImage("close_button");
 			SEND_TROOPS = ImageManager.getImage("send_troops");
 			VERIFY_BUTTON = ImageManager.getImage("verify_button");
-			TIMING_REGION = new Region(1262, 443, 81, 30);
+			CONFIRM_BUTTON = ImageManager.getImage("confirm_button");
+			ROC_ICON = ImageManager.getImage("roc_icon");
 		}
 	}
 }

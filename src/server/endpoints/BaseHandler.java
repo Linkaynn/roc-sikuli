@@ -1,25 +1,48 @@
 package server.endpoints;
 
 import com.google.gson.Gson;
-import org.webbitserver.HttpResponse;
+import io.javalin.Context;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class BaseHandler {
 
 	Gson gson = new Gson();
-	HttpResponse response;
+	Context context;
 
-	private HttpResponse addHeaders(String contentType) {
-		return response
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Content-Type", contentType);
+	class OkMessage {
+		Object data;
+
+		public OkMessage(Object object) {
+			data = object;
+		}
+	}
+
+	private Context addHeaders(String contentType) {
+		context.header("Access-Control-Allow-Origin", "*");
+		context.header("Content-Type", contentType);
+
+		return context;
 	}
 
 	protected void ok(Object object) {
-		addHeaders("text/json").content(toJson(object)).end();
+		addHeaders("text/json").result(gson.toJson(object));
 	}
 
-	protected void sendFile(byte[] image) {
-		addHeaders("image/png").content(image).end();
+	protected void sendFile(BufferedImage image) {
+		addHeaders("image/jpeg");
+
+		try {
+			ServletOutputStream baos = context.res.getOutputStream();
+			ImageIO.write(image, "jpg", baos);
+			baos.flush();
+			baos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 
