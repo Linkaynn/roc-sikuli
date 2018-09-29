@@ -6,9 +6,12 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.sikuli.script.Pattern;
+import status.ROCState;
 import status.Statistics;
+import status.Status;
 
-import static status.State.EXPLORING;
+import static status.Status.*;
+
 
 public class ExploreAction extends Action {
 	private static Logger log = LogManager.getLogger(ExploreAction.class);
@@ -29,7 +32,7 @@ public class ExploreAction extends Action {
 
 	@Override
 	public boolean start() {
-		if (!EXPLORING) return false;
+		if (!doing(EXPLORING)) return false;
 
 		log.log(Level.INFO, "Starting exploring...");
 
@@ -99,7 +102,7 @@ public class ExploreAction extends Action {
 	@Override
 	public boolean click(Pattern... images) {
 		for (Pattern image : images) {
-			if (!EXPLORING || !super.click(image)) return false;
+			if (!doing(EXPLORING) || !super.click(image)) return false;
 		}
 
 		return true;

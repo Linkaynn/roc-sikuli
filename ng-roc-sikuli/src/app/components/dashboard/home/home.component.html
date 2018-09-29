@@ -1,15 +1,52 @@
 <div *ngIf="state" class="container pt-3">
   <div>
+    <h5 class="bold orange">More</h5>
+    <mat-accordion [multi]="true">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Statistics</mat-panel-title>
+          <mat-panel-description>See the statistics</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-roc-statistics [statistics]="state.statistics"></app-roc-statistics>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Controls</mat-panel-title>
+          <mat-panel-description>Control bot actions</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-controls [state]="state"></app-controls>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Log
+          </mat-panel-title>
+          <mat-panel-description>
+            See the log
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-console-output [logLines]="state.logLines"></app-console-output>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <hr class="border-brand-color">
+
+  <div>
     <h5 class="bold pb-0 mb-0 orange">Current status</h5>
     <span>{{state.currentStatus}}</span> <i *ngIf="state.withoutSession()" class="fa fa-refresh"
                                             (click)="clickConfirm()"></i>
   </div>
 
-  <div class="mt-3">
-    <app-roc-statistics [statistics]="state.statistics"></app-roc-statistics>
-  </div>
-
-  <app-console-output [logLines]="state.logLines"></app-console-output>
+  <hr class="border-brand-color">
 
   <app-last-image [state]="state"></app-last-image>
 </div>

@@ -15,7 +15,8 @@ import {RouterModule} from "@angular/router";
 import {RocStatisticsComponent} from './components/shared/statistics/roc-statistics.component';
 import {LastImageComponent} from "./components/shared/last-image/last-image.component";
 import {ConsoleOutputComponent} from "./components/shared/console-output/console-output.component";
-import {MatSliderModule} from "@angular/material";
+import {MatExpansionModule, MatSliderModule, MatSlideToggleModule} from "@angular/material";
+import { ControlsComponent } from './components/shared/controls/controls.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +26,17 @@ import {MatSliderModule} from "@angular/material";
     DashboardComponent,
     HomeComponent,
     LastImageComponent,
-    RocStatisticsComponent
+    RocStatisticsComponent,
+    ControlsComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatExpansionModule
   ],
   providers: [
     RocService,

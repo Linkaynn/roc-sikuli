@@ -7,11 +7,14 @@ import org.apache.log4j.Logger;
 import server.Server;
 import settings.KeysHandler;
 import settings.Settings;
+import status.ROCState;
 import status.Status;
 import util.BotChecker;
 import util.SessionChecker;
 
-import static status.State.*;
+import java.util.Map;
+
+import static status.ROCState.*;
 
 public class ROC extends Application {
 	private static Logger log = LogManager.getLogger(ROC.class);
@@ -30,11 +33,12 @@ public class ROC extends Application {
 		Settings.initialize();
 		Server.init();
 		KeysHandler.init();
+		ROCState.init();
 
-		while (RUNNING) {
+		while (doing(Status.RUNNING)) {
 			if (checkersStatusOK()) {
 				checkIfIAmIdle();
-				if (EXPLORING) {
+				if (doing(Status.EXPLORING)) {
 					changeStatus(Status.EXPLORING);
 					exploreAction.start();
 				}
@@ -46,6 +50,11 @@ public class ROC extends Application {
 		log.log(Level.INFO, "Process ends here");
 
 		changeStatus(Status.OFF);
+	}
+
+	private boolean doing(Status status) {
+		Boolean doingIt = ROCState.CURRENT_DOING.get(status);
+		return doingIt != null && doingIt;
 	}
 
 	private boolean checkersStatusOK() {
@@ -78,7 +87,9 @@ public class ROC extends Application {
 	}
 
 	private void checkIfIAmIdle() {
-		if (CURRENT_STATUS != Status.IDLE && !EXPLORING) {
+		boolean doingSomeThing = CURRENT_DOING.entrySet().stream().filter(statusBooleanEntry -> statusBooleanEntry.getKey() != Status.RUNNING).anyMatch(Map.Entry::getValue);
+
+		if (CURRENT_STATUS != Status.IDLE && !doingSomeThing) {
 			changeStatus(Status.IDLE);
 		}
 	}

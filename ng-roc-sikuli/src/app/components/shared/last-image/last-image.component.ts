@@ -29,10 +29,6 @@ export class LastImageComponent {
     this.timeout();
   }
 
-  log(event) {
-    console.log(event);
-  }
-
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {

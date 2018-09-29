@@ -11,9 +11,11 @@ import org.sikuli.script.FindFailed;
 import org.sikuli.script.Location;
 import org.sikuli.script.Match;
 import org.sikuli.script.Screen;
+import status.ROCState;
+import status.Status;
 
 enum Actions {
-	CLICK_CONFIRM, MOVE_PIECE
+	CLICK_CONFIRM, MOVE_PIECE, CHANGE_STATE
 }
 
 public class InputHandler extends BaseHandler implements Handler {
@@ -30,19 +32,22 @@ public class InputHandler extends BaseHandler implements Handler {
 			UtilActions utilActions = new UtilActions();
 
 			switch (action) {
-				case MOVE_PIECE:
-					String posRaw = context.queryParam("pos");
+				case CHANGE_STATE:
+					String statusRaw = context.queryParam("status");
+					String checkedRaw = context.queryParam("checked");
 
-					try {
-						Match puzzleMatch = Screen.getPrimaryScreen().find(Patterns.Common.PUZZLE_SLIDER);
+					if (statusRaw != null && checkedRaw != null) {
+						Status status = Status.valueOf(statusRaw.toUpperCase());
+						boolean checked = Boolean.valueOf(checkedRaw);
 
-						if (posRaw != null && puzzleMatch != null) {
-							utilActions.dragAndDrop(puzzleMatch, new Location(Integer.parseInt(posRaw), puzzleMatch.y));
-						}
-					} catch (FindFailed e) {
-						log.log(Level.ERROR, "Cannot move the piece");
-						log.log(Level.ERROR, e);
+						log.log(Level.INFO, String.format("Now you %s %s", checked ? "are": "are NOT", status.toString().toLowerCase()));
+						ROCState.CURRENT_DOING.put(status, checked);
+					} else {
+						error(405);
 					}
+					break;
+				case MOVE_PIECE:
+					movePiece(context, utilActions);
 					break;
 				case CLICK_CONFIRM:
 					utilActions.click(false, Patterns.Common.CONFIRM_BUTTON);
@@ -54,9 +59,26 @@ public class InputHandler extends BaseHandler implements Handler {
 			}
 
 			ok("");
+
+			return;
 		}
 
 		error(404);
+	}
+
+	private void movePiece(Context context, UtilActions utilActions) {
+		String posRaw = context.queryParam("pos");
+
+		try {
+			Match puzzleMatch = Screen.getPrimaryScreen().find(Patterns.Common.PUZZLE_SLIDER);
+
+			if (posRaw != null && puzzleMatch != null) {
+				utilActions.dragAndDrop(puzzleMatch, new Location(Integer.parseInt(posRaw), puzzleMatch.y));
+			}
+		} catch (FindFailed e) {
+			log.log(Level.ERROR, "Cannot move the piece");
+			log.log(Level.ERROR, e);
+		}
 	}
 
 }

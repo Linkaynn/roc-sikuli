@@ -7,9 +7,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.sikuli.script.Screen;
 import server.endpoints.lightweight.EnvironmentInfoLight;
-import server.endpoints.lightweight.ROCState;
+import server.endpoints.lightweight.ROCStateLight;
 import server.endpoints.lightweight.StatisticsLight;
-import status.State;
+import status.ROCState;
 import status.Statistics;
 
 import java.awt.*;
@@ -31,17 +31,18 @@ public class StatusHandler extends BaseHandler implements Handler {
 	public void handle(Context context) {
 		this.context = context;
 
-		ROCState state = new ROCState();
+		ROCStateLight state = new ROCStateLight();
 
-		state.setCurrentStatus(State.CURRENT_STATUS);
+		state.setCurrentStatus(ROCState.CURRENT_STATUS);
 		setStatistics(state);
 		setEnvironmentInfo(state);
+		state.setCurrentDoing(ROCState.CURRENT_DOING);
 		retrieveLogLines(state);
 
 		ok(new OkMessage(state));
 	}
 
-	private void setEnvironmentInfo(ROCState state) {
+	private void setEnvironmentInfo(ROCStateLight state) {
 		Rectangle bounds = Screen.getPrimaryScreen().getBounds();
 
 		EnvironmentInfoLight environmentInfoLight = new EnvironmentInfoLight();
@@ -50,13 +51,13 @@ public class StatusHandler extends BaseHandler implements Handler {
 		state.setEnvironmentInfo(environmentInfoLight);
 	}
 
-	private void setStatistics(ROCState state) {
+	private void setStatistics(ROCStateLight state) {
 		StatisticsLight statistics = new StatisticsLight();
 		statistics.setExploredTimes(Statistics.EXPLORED_TIMES);
 		state.setStatistics(statistics);
 	}
 
-	private void retrieveLogLines(ROCState state) {
+	private void retrieveLogLines(ROCStateLight state) {
 		try {
 			List<String> logLines = Files.lines(Paths.get("ROC.log"))
 					.filter(line -> {
@@ -72,7 +73,7 @@ public class StatusHandler extends BaseHandler implements Handler {
 								return false;
 							}
 
-							return date.getTime() > State.START_PROGRAM_TIME;
+							return date.getTime() > ROCState.START_PROGRAM_TIME;
 						}
 
 						return false;

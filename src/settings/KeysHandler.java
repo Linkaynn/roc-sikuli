@@ -1,8 +1,6 @@
 package settings;
 
 import actions.util.UtilActions;
-import images.Patterns;
-import javafx.application.Application;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -12,12 +10,13 @@ import org.sikuli.script.Key;
 import org.sikuli.script.KeyModifier;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
+import status.ROCState;
+import status.Status;
 
 import java.awt.*;
 
 import static images.Patterns.*;
-import static status.State.EXPLORING;
-import static status.State.RUNNING;
+import static status.ROCState.*;
 
 public class KeysHandler {
 	private static final Screen primaryScreen = Screen.getPrimaryScreen();
@@ -88,9 +87,11 @@ public class KeysHandler {
 			@Override
 			public void hotkeyPressed(HotkeyEvent hotkeyEvent) {
 				Toolkit.getDefaultToolkit().beep();
-				EXPLORING = !EXPLORING;
+				boolean newValue = !CURRENT_DOING.get(Status.EXPLORING);
 
-				String message = EXPLORING ? "Exploring was activated" : "Exploring was deactivated";
+				CURRENT_DOING.put(Status.EXPLORING, newValue);
+
+				String message = newValue ? "Exploring was activated" : "Exploring was deactivated";
 				log.log(Level.INFO, message);
 			}
 		});

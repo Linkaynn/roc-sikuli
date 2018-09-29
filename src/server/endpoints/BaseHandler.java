@@ -38,7 +38,7 @@ public class BaseHandler {
 	}
 
 	protected void ok(Object object) {
-		addHeaders("text/json").result(gson.toJson(object));
+		addHeaders("text/json").status(200).result(gson.toJson(object));
 	}
 
 	protected void sendFile(BufferedImage image) {

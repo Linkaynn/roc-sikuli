@@ -9,6 +9,8 @@ import org.sikuli.script.Key;
 import org.sikuli.script.Location;
 import org.sikuli.script.Mouse;
 import org.sikuli.script.Pattern;
+import status.ROCState;
+import status.Status;
 
 public abstract class Action extends Controller {
 	private static Logger log = LogManager.getLogger(Action.class);
@@ -58,5 +60,11 @@ public abstract class Action extends Controller {
 		} catch (InterruptedException e) {
 			log.log(Level.ERROR, String.format("Error sleeping %s seconds", secs));
 		}
+	}
+
+	protected boolean doing(Status status) {
+		Boolean doingIt = ROCState.CURRENT_DOING.get(status);
+
+		return doingIt != null && doingIt;
 	}
 }
