@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ROCState} from "../../../model/roc-state";
-import {StatusService} from "../../../services/status.service";
+import {RocService} from "../../../services/roc.service";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ export class HomeComponent {
   private intervalTime: number = 2500;
   private loadingState = false;
 
-  constructor(private statusService: StatusService) {
+  constructor(private statusService: RocService) {
     this.timeout();
   }
 

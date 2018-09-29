@@ -3,7 +3,7 @@ import {BaseService} from "../helpers/base-service/base-service";
 import {ServicesCore} from "../helpers/base-service/service-core-provider";
 
 @Injectable()
-export class StatusService extends BaseService {
+export class RocService extends BaseService {
 
   constructor(protected core: ServicesCore) {
     super(core);
@@ -22,6 +22,8 @@ export class StatusService extends BaseService {
   }
 
   movePiece(pos: number) {
-    return this.get("input", [{action: "move_piece"}, {pos: pos}])
+    let params : any = [ { action: "move_piece" }, { pos: pos } ];
+
+    return this.get("input", params)
   }
 }

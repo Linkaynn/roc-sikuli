@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TopNavComponent} from "./components/top-nav/top-nav.component";
-import {StatusService} from "./services/status.service";
+import {RocService} from "./services/roc.service";
 import {ServicesCore} from "./helpers/base-service/service-core-provider";
 import {BaseService} from "./helpers/base-service/base-service";
 import {HttpClientModule} from "@angular/common/http";
@@ -35,7 +35,7 @@ import {MatSliderModule} from "@angular/material";
     MatSliderModule
   ],
   providers: [
-    StatusService,
+    RocService,
     ServicesCore,
     BaseService
   ],

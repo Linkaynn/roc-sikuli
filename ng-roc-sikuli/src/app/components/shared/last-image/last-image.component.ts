@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {StatusService} from "../../../services/status.service";
+import {RocService} from "../../../services/roc.service";
 import {ROCState} from "../../../model/roc-state";
 
 @Component({
@@ -25,7 +25,7 @@ export class LastImageComponent {
   loadingImage = false;
 
 
-  constructor(private rocService: StatusService) {
+  constructor(private rocService: RocService) {
     this.timeout();
   }
 
