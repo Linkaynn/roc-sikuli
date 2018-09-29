@@ -52,7 +52,7 @@ public class ROC extends Application {
 		if (botChecker.checking()) {
 			if (CURRENT_STATUS != Status.CHECKING) {
 				changeStatus(Status.CHECKING);
-				log.log(Level.WARN, "Bot checker activated with: " + botChecker.getText());
+				log.log(Level.WARN, "Bot checker activated");
 			}
 
 			return false;

@@ -8,6 +8,7 @@ public class Patterns {
 		Explorer.init();
 		Common.init();
 		Map.init();
+		Verifier.init();
 		Regions.init();
 		Test.init();
 	}
@@ -51,11 +52,27 @@ public class Patterns {
 
 	public static class Regions {
 		public static Region TIMING_REGION;
+		public static Region FIRST_PART_PUZZLE;
+		public static Region SECOND_PART_PUZZLE;
 		public static Region OTHER_DEVISE_SESSION_REGION;
 
 		public static void init() {
+			FIRST_PART_PUZZLE = new Region(754, 347, 96, 219);
+			SECOND_PART_PUZZLE = new Region(838, 332, 319, 226);
 			TIMING_REGION = new Region(1262, 443, 81, 30);
 			OTHER_DEVISE_SESSION_REGION = new Region(631, 478, 620, 34);
+		}
+	}
+
+	public static class Verifier {
+		public static Pattern YELLOW_ZONE;
+		public static Pattern TEST;
+		public static Pattern DARK_ZONE;
+
+		public static void init() {
+			YELLOW_ZONE = ImageManager.getImage("yellow_zone").similar(0.45);
+			DARK_ZONE = ImageManager.getImage("dark_zone").similar(0.6);
+			TEST = ImageManager.getImage("test").similar(0.3);
 		}
 	}
 

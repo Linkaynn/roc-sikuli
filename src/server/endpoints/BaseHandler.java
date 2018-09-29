@@ -40,9 +40,7 @@ public class BaseHandler {
 			ImageIO.write(image, "jpg", baos);
 			baos.flush();
 			baos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch (IOException ignored) {}
 	}
 
 

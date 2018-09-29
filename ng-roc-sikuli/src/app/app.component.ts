@@ -19,16 +19,17 @@ export class AppComponent {
   private loadingState = false;
   private loadingImage = false;
 
-  constructor(private statusService: StatusService, private sanitizer: DomSanitizer) {
+  constructor(private statusService: StatusService) {
     this.timeout();
   }
 
   private timeout() {
     setTimeout(() => {
-      if (this.loadingImage || this.loadingState) return;
-
-      this.retrieveStatus();
       this.retrieveLastImage();
+    }, this.intervalTime);
+
+    setTimeout(() => {
+      this.retrieveStatus();
     }, this.intervalTime);
   }
 
