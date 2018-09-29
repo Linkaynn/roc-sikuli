@@ -8,10 +8,19 @@ import javax.servlet.ServletOutputStream;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+class ContentTypes {
+	protected static final String JSON = "text/json";
+	protected static final String JPEG = "image/jpeg";
+}
+
 public class BaseHandler {
 
 	Gson gson = new Gson();
 	Context context;
+
+	protected void error(int errorCode) {
+		addHeaders(ContentTypes.JSON).status(errorCode).result("");
+	}
 
 	class OkMessage {
 		Object data;
@@ -33,7 +42,7 @@ public class BaseHandler {
 	}
 
 	protected void sendFile(BufferedImage image) {
-		addHeaders("image/jpeg");
+		addHeaders(ContentTypes.JPEG);
 
 		try {
 			ServletOutputStream baos = context.res.getOutputStream();

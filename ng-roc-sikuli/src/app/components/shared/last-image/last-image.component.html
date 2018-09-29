@@ -1,11 +1,12 @@
-<div *ngIf="state && lastImage">
+<div *ngIf="state && currentScreenImage">
   <h5 class="bold pb-0 mb-0 orange">Screen</h5>
   <div class="mt-2">
     <p class="bold mb-0 pt-0 text-center">Capturing ({{state.environmentInfo.screenWidth + " x " + state.environmentInfo.screenHeight}}) screen </p>
-    <img *ngIf="lastImage" class="img-fluid" [src]="lastImage">
+    <i *ngIf="state.botVerificationIsPresent()" [style.left.%]="(puzzlePieceXPos / state.environmentInfo.screenWidth) * 100" class="fa fa-2x fa-arrow-up orange position-relative puzzle-icon"></i>
+    <img *ngIf="currentScreenImage" class="img-fluid" [src]="currentScreenImage">
   </div>
   <div *ngIf="state.botVerificationIsPresent()" class="mt-2">
-    <p class="bold mb-0 pt-0">Screen info</p>
+    <mat-slider class="col-12" [min]="0" [max]="state.environmentInfo.screenWidth" [step]="5" (input)="puzzlePieceXPos = $event.value" (change)="movePiece()" [value]="puzzlePieceXPos"></mat-slider>
   </div>
 </div>
 

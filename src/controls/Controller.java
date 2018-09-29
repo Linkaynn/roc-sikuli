@@ -5,9 +5,7 @@ import controls.exceptions.TextNotFoundException;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.sikuli.script.Pattern;
-import org.sikuli.script.Region;
-import org.sikuli.script.Screen;
+import org.sikuli.script.*;
 
 public class Controller {
 	private static Logger log = LogManager.getLogger(Controller.class);
@@ -76,5 +74,13 @@ public class Controller {
 
 	protected boolean exists(Pattern image) {
 		return screen.exists(image) != null;
+	}
+
+	public boolean dragAndDrop(Object drag, Object drop) {
+		try {
+			screen.dragDrop(drag, drop);
+			return true;
+		} catch (FindFailed ignored) {}
+		return false;
 	}
 }

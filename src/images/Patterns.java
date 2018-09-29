@@ -84,6 +84,7 @@ public class Patterns {
 		public static Pattern VERIFY_BUTTON;
 		public static Pattern CONFIRM_BUTTON;
 		public static Pattern ROC_ICON;
+		public static Pattern PUZZLE_SLIDER;
 
 		public static void init() {
 			HOME = ImageManager.getImage("home");
@@ -91,6 +92,7 @@ public class Patterns {
 			CLOSE_BUTTON = ImageManager.getImage("close_button");
 			SEND_TROOPS = ImageManager.getImage("send_troops");
 			VERIFY_BUTTON = ImageManager.getImage("verify_button");
+			PUZZLE_SLIDER = ImageManager.getImage("puzzle_slider");
 			CONFIRM_BUTTON = ImageManager.getImage("confirm_button");
 			ROC_ICON = ImageManager.getImage("roc_icon");
 		}

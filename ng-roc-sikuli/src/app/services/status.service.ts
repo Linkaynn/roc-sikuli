@@ -17,7 +17,11 @@ export class StatusService extends BaseService {
     return this.getFile("last-image");
   }
 
-  newSession() {
-    this.get("input", [{action: "new_session"}])
+  clickConfirm() {
+    return this.get("input", [{action: "click_confirm"}])
+  }
+
+  movePiece(pos: number) {
+    return this.get("input", [{action: "move_piece"}, {pos: pos}])
   }
 }

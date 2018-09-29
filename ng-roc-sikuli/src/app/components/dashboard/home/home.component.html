@@ -2,7 +2,7 @@
   <div>
     <h5 class="bold pb-0 mb-0 orange">Current status</h5>
     <span>{{state.currentStatus}}</span> <i *ngIf="state.withoutSession()" class="fa fa-refresh"
-                                            (click)="newSession()"></i>
+                                            (click)="clickConfirm()"></i>
   </div>
 
   <div class="mt-3">

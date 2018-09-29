@@ -11,19 +11,32 @@ export class LastImageComponent {
 
   @Input() state: ROCState;
 
-  lastImage: any;
+  /**
+   * Screen image
+   */
+  currentScreenImage: any;
 
-  private intervalTime: number = 2500;
-  private loadingImage = false;
+  /**
+   * Next position of image
+   */
+  puzzlePieceXPos: number = 0;
 
-  constructor(private statusService: StatusService) {
+  intervalTime: number = 2500;
+  loadingImage = false;
+
+
+  constructor(private rocService: StatusService) {
     this.timeout();
+  }
+
+  log(event) {
+    console.log(event);
   }
 
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
-      this.lastImage = reader.result;
+      this.currentScreenImage = reader.result;
     }, false);
 
     if (image) {
@@ -42,7 +55,7 @@ export class LastImageComponent {
 
     this.loadingImage = true;
 
-    this.statusService.getImage().then((value: Blob) => {
+    this.rocService.getImage().then((value: Blob) => {
       this.createImageFromBlob(value);
 
       this.loadingImage = false;
@@ -55,5 +68,11 @@ export class LastImageComponent {
 
       console.error(err);
     })
+  }
+
+  movePiece() {
+    let resetPiece = () => { this.puzzlePieceXPos = 0 };
+
+    this.rocService.movePiece(this.puzzlePieceXPos).then(resetPiece).catch(resetPiece)
   }
 }

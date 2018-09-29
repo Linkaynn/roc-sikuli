@@ -18,8 +18,8 @@ export class HomeComponent {
     this.timeout();
   }
 
-  newSession() {
-    this.statusService.newSession()
+  clickConfirm() {
+    this.statusService.clickConfirm()
   }
 
   private timeout() {
