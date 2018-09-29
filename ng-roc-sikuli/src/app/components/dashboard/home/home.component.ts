@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {ROCState} from "../../../model/roc-state";
 import {StatusService} from "../../../services/status.service";
 
@@ -16,6 +16,10 @@ export class HomeComponent {
 
   constructor(private statusService: StatusService) {
     this.timeout();
+  }
+
+  newSession() {
+    this.statusService.newSession()
   }
 
   private timeout() {
@@ -41,12 +45,8 @@ export class HomeComponent {
       this.intervalTime = 5000;
       this.timeout();
 
-      this.state.currentStatus = "OFFLINE";
+      this.state.isOffline();
     })
-  }
-
-  newSession() {
-    this.statusService.newSession()
   }
 
 }

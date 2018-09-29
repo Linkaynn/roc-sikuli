@@ -1,7 +1,8 @@
 <div *ngIf="state" class="container pt-3">
   <div>
-    <h6 class="bold pb-0 mb-0">Current status</h6>
-    <span>{{state.currentStatus}}</span> <i *ngIf="state.currentStatus == 'NO_SESSION'" class="fa fa-refresh" (click)="newSession()"></i>
+    <h5 class="bold pb-0 mb-0 orange">Current status</h5>
+    <span>{{state.currentStatus}}</span> <i *ngIf="state.withoutSession()" class="fa fa-refresh"
+                                            (click)="newSession()"></i>
   </div>
 
   <div class="mt-3">

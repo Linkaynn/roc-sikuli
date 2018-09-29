@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ROCstatistics} from "../../../model/roc-state";
+import {Component, Input} from '@angular/core';
+import {RocStatistics} from "../../../model/roc-state";
 
 @Component({
   selector: 'app-roc-statistics',
@@ -8,8 +8,9 @@ import {ROCstatistics} from "../../../model/roc-state";
 })
 export class RocStatisticsComponent {
 
-  @Input() statistics : ROCstatistics = new ROCstatistics();
+  @Input() statistics: RocStatistics = new RocStatistics();
 
-  constructor() { }
+  constructor() {
+  }
 
 }

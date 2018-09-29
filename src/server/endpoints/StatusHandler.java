@@ -5,11 +5,14 @@ import io.javalin.Handler;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.sikuli.script.Screen;
+import server.endpoints.lightweight.EnvironmentInfoLight;
 import server.endpoints.lightweight.ROCState;
 import server.endpoints.lightweight.StatisticsLight;
 import status.State;
 import status.Statistics;
 
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -32,9 +35,19 @@ public class StatusHandler extends BaseHandler implements Handler {
 
 		state.setCurrentStatus(State.CURRENT_STATUS);
 		setStatistics(state);
+		setEnvironmentInfo(state);
 		retrieveLogLines(state);
 
 		ok(new OkMessage(state));
+	}
+
+	private void setEnvironmentInfo(ROCState state) {
+		Rectangle bounds = Screen.getPrimaryScreen().getBounds();
+
+		EnvironmentInfoLight environmentInfoLight = new EnvironmentInfoLight();
+		environmentInfoLight.setScreenWidth(bounds.width);
+		environmentInfoLight.setScreenHeight(bounds.height);
+		state.setEnvironmentInfo(environmentInfoLight);
 	}
 
 	private void setStatistics(ROCState state) {

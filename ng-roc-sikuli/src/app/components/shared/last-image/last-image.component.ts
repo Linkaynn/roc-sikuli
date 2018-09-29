@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {StatusService} from "../../../services/status.service";
 import {ROCState} from "../../../model/roc-state";
 
@@ -9,7 +9,7 @@ import {ROCState} from "../../../model/roc-state";
 })
 export class LastImageComponent {
 
-  @Input() state : ROCState;
+  @Input() state: ROCState;
 
   lastImage: any;
 
@@ -18,6 +18,17 @@ export class LastImageComponent {
 
   constructor(private statusService: StatusService) {
     this.timeout();
+  }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.lastImage = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
   }
 
   private timeout() {
@@ -44,17 +55,5 @@ export class LastImageComponent {
 
       console.error(err);
     })
-  }
-
-
-  createImageFromBlob(image: Blob) {
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.lastImage = reader.result;
-    }, false);
-
-    if (image) {
-      reader.readAsDataURL(image);
-    }
   }
 }

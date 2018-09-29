@@ -52,7 +52,7 @@ export class BaseService {
   }
 
   protected getFile(endpoint) {
-    return this.http.get(BaseService.BASE_URL + this.insertSlashIfNeeded(endpoint) + endpoint, { responseType: 'blob' }).toPromise()
+    return this.http.get(BaseService.BASE_URL + this.insertSlashIfNeeded(endpoint) + endpoint, {responseType: 'blob'}).toPromise()
   }
 
   private buildHeader() {

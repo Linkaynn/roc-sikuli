@@ -1,2 +1,11 @@
-<img *ngIf="this.lastImage" class="img-fluid" [src]="this.lastImage">
+<div *ngIf="state && lastImage">
+  <h5 class="bold pb-0 mb-0 orange">Screen</h5>
+  <div class="mt-2">
+    <p class="bold mb-0 pt-0 text-center">Capturing ({{state.environmentInfo.screenWidth + " x " + state.environmentInfo.screenHeight}}) screen </p>
+    <img *ngIf="lastImage" class="img-fluid" [src]="lastImage">
+  </div>
+  <div *ngIf="state.botVerificationIsPresent()" class="mt-2">
+    <p class="bold mb-0 pt-0">Screen info</p>
+  </div>
+</div>
 

@@ -50,8 +50,8 @@ public class ROC extends Application {
 
 	private boolean checkersStatusOK() {
 		if (botChecker.checking()) {
-			if (CURRENT_STATUS != Status.CHECKING) {
-				changeStatus(Status.CHECKING);
+			if (CURRENT_STATUS != Status.ANTIBOT_PRESENT) {
+				changeStatus(Status.ANTIBOT_PRESENT);
 				log.log(Level.WARN, "Bot checker activated");
 			}
 

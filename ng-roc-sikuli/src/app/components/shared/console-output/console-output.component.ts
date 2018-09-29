@@ -7,9 +7,10 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ConsoleOutputComponent implements OnInit {
 
-  @Input() logLines : string[];
+  @Input() logLines: string[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
