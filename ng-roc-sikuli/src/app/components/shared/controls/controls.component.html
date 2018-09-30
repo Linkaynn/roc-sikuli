@@ -1,9 +1,20 @@
 <div *ngIf="state">
-  <h6 class="bold brand-color mb-0 pt-0">Current doing</h6>
-  <div class="row">
-    <div class="col-12">
-      <label class="d-block bold mb-0">Exploring</label>
-      <mat-slide-toggle [checked]="state.currentDoing.exploring()" (change)="changeStatus(status.EXPLORING, $event.checked)"></mat-slide-toggle>
+  <div>
+    <h6 class="bold brand-color mb-0 pt-0">Current doing</h6>
+    <div class="row">
+      <div class="col-12">
+        <label class="d-block bold mb-0">Exploring</label>
+        <mat-slide-toggle [checked]="state.currentDoing.exploring()"
+                          (change)="changeStatus(status.EXPLORING, $event.checked)"></mat-slide-toggle>
+      </div>
+    </div>
+  </div>
+  <div class="mt-2">
+    <h6 class="bold brand-color mb-0 pt-0">Other actions</h6>
+    <div class="row">
+      <div class="col-3 mt-2">
+        <button mat-raised-button color="primary" (click)="clickOnVerify()">Click on verify</button>
+      </div>
     </div>
   </div>
 </div>

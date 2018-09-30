@@ -19,4 +19,8 @@ export class ControlsComponent {
   changeStatus(status : Status, checked: boolean) {
     this.rocService.changeStatus(status, checked).then(() => this.state.currentDoing[status] = checked).catch((err) => console.error(err))
   }
+
+  clickOnVerify() {
+    this.rocService.clickVerify().then(() => {}).catch((err) => console.error(err))
+  }
 }

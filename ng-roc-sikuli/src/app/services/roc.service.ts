@@ -33,4 +33,8 @@ export class RocService extends BaseService {
 
     return this.get("input", params)
   }
+
+  clickVerify() {
+    return this.get("input", [{action: "click_verify"}])
+  }
 }

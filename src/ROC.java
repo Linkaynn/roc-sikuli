@@ -1,4 +1,7 @@
 import actions.ExploreAction;
+import com.github.sheigutn.pushbullet.Pushbullet;
+import com.github.sheigutn.pushbullet.items.push.sendable.defaults.SendableLinkPush;
+import com.github.sheigutn.pushbullet.items.push.sendable.defaults.SendableNotePush;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.apache.log4j.Level;
@@ -23,6 +26,7 @@ public class ROC extends Application {
 	private SessionChecker sessionChecker = new SessionChecker();
 
 	private ExploreAction exploreAction = ExploreAction.instance();
+	private Pushbullet pushbullet = new Pushbullet("<apikey>");
 
 	public static void main(String[] args) {
 		Application.launch(ROC.class);
@@ -61,6 +65,7 @@ public class ROC extends Application {
 		if (botChecker.checking()) {
 			if (CURRENT_STATUS != Status.ANTIBOT_PRESENT) {
 				changeStatus(Status.ANTIBOT_PRESENT);
+				pushbullet.sendPush(pushbullet, new SendableLinkPush("ROC Sikuli Control", "Antibot detected", "http://roc.servegame.com:4200"));
 				log.log(Level.WARN, "Bot checker activated");
 			}
 

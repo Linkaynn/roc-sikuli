@@ -1,3 +1,7 @@
+import com.github.sheigutn.pushbullet.Pushbullet;
+import com.github.sheigutn.pushbullet.items.device.Device;
+import com.github.sheigutn.pushbullet.items.push.sendable.defaults.SendableLinkPush;
+import com.github.sheigutn.pushbullet.items.push.sendable.defaults.SendableNotePush;
 import images.ImageManager;
 import images.Patterns;
 import javafx.application.Application;
@@ -38,36 +42,39 @@ public class Tester extends Application {
 		Server.init();
 		KeysHandler.init();
 
-		Robot robot = new Robot();
+		Pushbullet pushbullet = new Pushbullet("o.thcFZ9AN5s80EnbmhUHhgcqnQPLpFYJZ");
 
-		region = ImageManager.getRegion();
-
-		if (region != null) {
-			bufferedImage = Screen.getPrimaryScreen().capture(region).getImage();
-
-			points = new ArrayList<>();
-			for (int i = 0; i < region.w; i++) {
-				for (int j = 0; j < region.h; j++) {
-					int[] color = getPixelARGB(bufferedImage, i, j);
-
-					if (Math.abs((getHue(color[0], color[1], color[2]) - 60)) < 10) {
-						points.add(new Point(i, j));
-					}
-				}
-			}
-		}
-
-		Toolkit.getDefaultToolkit().beep();
-
-		Point topLeft = new Point(0, 0);
-
-		min = new Point();
-		points.stream().min(Comparator.comparingDouble(o2 -> distance(topLeft, o2))).ifPresent(point -> min = point);
-
-		max = new Point();
-		points.stream().max(Comparator.comparingDouble(o2 -> distance(topLeft, o2))).ifPresent(point -> max = point);
-
-		saveImage();
+		pushbullet.sendPush(pushbullet, new SendableLinkPush("ROC Sikuli Control", "Antibot detected", "http://roc.servegame.com:4200"));
+//		Robot robot = new Robot();
+//
+//		region = ImageManager.getRegion();
+//
+//		if (region != null) {
+//			bufferedImage = Screen.getPrimaryScreen().capture(region).getImage();
+//
+//			points = new ArrayList<>();
+//			for (int i = 0; i < region.w; i++) {
+//				for (int j = 0; j < region.h; j++) {
+//					int[] color = getPixelARGB(bufferedImage, i, j);
+//
+//					if (Math.abs((getHue(color[0], color[1], color[2]) - 60)) < 10) {
+//						points.add(new Point(i, j));
+//					}
+//				}
+//			}
+//		}
+//
+//		Toolkit.getDefaultToolkit().beep();
+//
+//		Point topLeft = new Point(0, 0);
+//
+//		min = new Point();
+//		points.stream().min(Comparator.comparingDouble(o2 -> distance(topLeft, o2))).ifPresent(point -> min = point);
+//
+//		max = new Point();
+//		points.stream().max(Comparator.comparingDouble(o2 -> distance(topLeft, o2))).ifPresent(point -> max = point);
+//
+//		saveImage();
 
 //			Patterns.Regions.FIRST_PART_PUZZLE.getCol(1, 2).highlight(1);
 //			Patterns.Regions.FIRST_PART_PUZZLE.findAllList(Patterns.Verifier.YELLOW_ZONE).stream().max(Comparator.comparing(Match::getScore)).ifPresent(match -> match.highlight(1));

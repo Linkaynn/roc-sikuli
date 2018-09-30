@@ -10,7 +10,7 @@ import server.endpoints.StatusHandler;
 
 public class Server {
 	public static final int PORT = 8080;
-	protected static final Javalin server = Javalin.create().start(PORT);
+	public static final Javalin server = Javalin.create().start(PORT);
 	private static Logger log = LogManager.getLogger(Server.class);
 
 	public static void init() {

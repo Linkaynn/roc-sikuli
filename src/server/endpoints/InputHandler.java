@@ -15,7 +15,7 @@ import status.ROCState;
 import status.Status;
 
 enum Actions {
-	CLICK_CONFIRM, MOVE_PIECE, CHANGE_STATE
+	CLICK_CONFIRM, MOVE_PIECE, CHANGE_STATE, CLICK_VERIFY
 }
 
 public class InputHandler extends BaseHandler implements Handler {
@@ -49,10 +49,13 @@ public class InputHandler extends BaseHandler implements Handler {
 				case MOVE_PIECE:
 					movePiece(context, utilActions);
 					break;
+				case CLICK_VERIFY:
+					utilActions.click(Patterns.Common.VERIFY_BUTTON);
+					break;
 				case CLICK_CONFIRM:
-					utilActions.click(false, Patterns.Common.CONFIRM_BUTTON);
+					utilActions.click(Patterns.Common.CONFIRM_BUTTON);
 					Thread.sleep(1000);
-					utilActions.click(false, Patterns.Common.ROC_ICON);
+					utilActions.click(Patterns.Common.ROC_ICON);
 					break;
 				default:
 					log.log(Level.WARN, String.format("%s action do not exist", action));

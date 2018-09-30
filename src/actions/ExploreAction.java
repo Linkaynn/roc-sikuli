@@ -110,6 +110,7 @@ public class ExploreAction extends Action {
 
 	private void closeAllWindows() {
 		while (click(Patterns.Common.CLOSE_BUTTON)) {
+			sleep(0.5f);
 		}
 	}
 }
